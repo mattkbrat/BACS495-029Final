@@ -1,0 +1,83 @@
+.App {
+  text-align: center;
+}
+
+body {
+  background: #282c34;
+}
+
+.App-body{
+  display: flex;
+}
+
+.App-logo {
+  height: 5vh;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #3b4048;
+  padding: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: calc(5px + 1vmin);
+  color: white;
+  align-items: center;
+  column-gap: 20px;
+
+}
+
+.App-footer {
+  background-color: #161416;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  min-height: 1vh;
+  justify-content: center;
+  font-size: inherit;
+  color: white;
+  align-items: center;
+  column-gap: 5px;
+  vertical-align: center;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.App-search {
+  max-width: 500px;
+  margin: 50px auto;
+}
+
+input[type="text"]{
+  display: block;
+  width: calc(100% - 20px); /*20px [ left & Right ] padding + 4px border [ left & Right ] */
+  font-size: inherit;
+  font-weight: 599;
+  color: #61dafb;
+  padding: 10px;
+  border: 2px solid #3b4048;
+  background: #181a1b;
+}
+
+.heart{
+  color: red;
+  font-size: x-large;
+}
+
+.flexcon{
+  display: flex;
+  column-gap: 5px;
+  width: 100%;
+  justify-content: center;
+  vertical-align: center;
+  align-items: center;
+}
