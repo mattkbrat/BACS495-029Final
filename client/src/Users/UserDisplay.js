@@ -1,8 +1,9 @@
 function UserDisplay(props) {
+    console.log(props);
     return <>
         List of current users:
         <ul>
-            {props.users.map(user => <li key={user.id}>{user.name}</li>)}
+            {props.users.map(user => <li key={user._id}>{user.author+" "+user.body}</li>)}
         </ul>
     </>
 }

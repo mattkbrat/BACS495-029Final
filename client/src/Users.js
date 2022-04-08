@@ -10,9 +10,7 @@ function Users() {
     useEffect(() => {
         fetch(process.env.REACT_APP_API_URL)
             .then(res => res.json())
-            .then(data => {
-                setUsers(data);
-            });
+            .then(data => setUsers(data))
     }, [update]);
 
     console.log(users);

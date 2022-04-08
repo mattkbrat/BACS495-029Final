@@ -1,46 +1,84 @@
-const express = require('express');
-const supabase = require('../util/supabaseClient');
+var express = require('express');
+const mongoose = require("mongoose");
 
-const router = express.Router();
+const { route } = require('.');
+const app = express();
+var router = express.Router();
 
-const asyncMiddleware = fn =>
-  (req, res, next) => {
-    Promise.resolve(fn(req, res, next))
-      .catch(next);
-  };
+const postSchema = new mongoose.Schema({
+  title: String,
+  author: String,
+  slug: {type: String, unique: true},
+  body: String,
+  comments: [{
+    body: String,
+    date: Date
+  }],
+  date: {type: Date, default: Date.now},
+})
 
-const getProfiles = () => {
-  return new Promise(async (resolve) => {
-    setTimeout(() => resolve(supabase
-        .from('profiles')
-        .select('id')), 1000);
-  })
-}
+const Post = mongoose.model('Post', postSchema);
 
-// const getProfiles = asyncMiddleware(async (req, res) => {
-//   const profiles = await supabase.from('profiles').select('*');
-//   return(profiles);
+// let pst = new Post({
+//   title: 'My second post',
+//   author: 'John Doe',
+//   slug: 'my-second-post',
+//   body: 'This is my second post',
+//   comments: [{
+//     body: 'This is my first comment',
+//     date: new Date()
+//   }],
+//   date: new Date()
+// });
+//
+// pst.save().then(() => {
+//   console.log('Post saved');
+// }).catch((err) => {
+//   console.log(err);
 // });
 
-
-/* GET users listing from supabase */
-router.post('/', function (req, res, next) {
-  res.json('1');
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  Post.find({}, function(err, posts) {
+    if (err) {
+      console.log(err);
+      res.send("Some error occurred");
+    } else {
+      console.log(posts);
+      res.json(Object.values(posts));
+    }
+  });
 });
 
 router.get('/:id', function(req, res, next) {
-  const db = req.app.locals.db;
-  console.log(db);
-  const cursor = db.collection('users').find({id: req.params.id});
-  cursor.toArray().then(c => res.json(c));
+  Post.find()
 });
 
-router.post('/', function(req, res, next) {
-  const db = req.app.locals.db;
-  console.log(req.app.locals);
+router.post("/", function(req, res, next){
+  const user = {
+    "id": req.body.id,
+    "name": req.body.name
+  }
+  console.log(user);
+  var db = process.env.MONGO_URI;
+  db.collection("users").insertOne(user);
+  res.json({"message":"User inserted"});
+  let post = new Post({
+    title: req.body.title,
+    author: req.body.author,
+    slug: req.body.slug,
+    body: req.body.body,
+    comments: [
+      {
+        body: req.comments.body,
+        date: Date.now()
+      }
+    ]
+  });
 
-  const user = req.body;
-  db.collection('users').insertOne(user).then(c => res.json(c));
+  post.save().then(() => {
+    console.log('Post saved');
+  });
 });
 
 module.exports = router;
