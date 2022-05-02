@@ -10,6 +10,7 @@ export default function MyHeader(){
                 >🏫
                 </a>
                 <input type="text" placeholder="🔍 Search..." name="search"/>
+                <button content="Register" onSubmit={}/>
                 {/*<Log_in/>*/}
             </header>
             </div>

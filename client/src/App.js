@@ -1,7 +1,6 @@
 import './index.css';
 
 import { useState, useEffect } from 'react';
-// import { supabaseClient } from "./supabaseClient";
 import Auth from './Auth';
 import Account from "./Account";
 
@@ -21,11 +20,18 @@ import {
 const aboutMe = { name : "Matt", linkedIn : "https://linkedin.com/in/mattkbrat"}
 
 
+
 function App() {
+    const [session, setSession] = useState(null);
+
     return (
         <div className="App">
-            <MyHeader about={aboutMe}/>
-            <Users/>
+            <MyHeader />
+            <Routes>
+                <Route exact path="/" element={<Home/>}/>
+                <Route exact path="/login" element={<Account/>}/>
+                <Route exact path="/questions" element={<Questions/>}/>
+            </Routes>
             <MyFooter myName={aboutMe.name} />
         </div>
     );

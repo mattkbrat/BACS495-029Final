@@ -1,45 +1,26 @@
-var express = require('express');
+let express = require('express');
 const mongoose = require("mongoose");
+const { v4 } = require('uuid');
 
 const { route } = require('.');
 const app = express();
-var router = express.Router();
+let router = express.Router();
 
-const postSchema = new mongoose.Schema({
-  title: String,
-  author: String,
-  slug: {type: String, unique: true},
-  body: String,
-  comments: [{
-    body: String,
-    date: Date
-  }],
-  date: {type: Date, default: Date.now},
+// User Schema
+const userSchema = new mongoose.Schema({
+  id: String,
+  name: String,
+  email: String,
+  password: String,
+  phone: String,
+  university: String
 })
 
-const Post = mongoose.model('Post', postSchema);
+const User = mongoose.model('User', userSchema);
 
-// let pst = new Post({
-//   title: 'My second post',
-//   author: 'John Doe',
-//   slug: 'my-second-post',
-//   body: 'This is my second post',
-//   comments: [{
-//     body: 'This is my first comment',
-//     date: new Date()
-//   }],
-//   date: new Date()
-// });
-//
-// pst.save().then(() => {
-//   console.log('Post saved');
-// }).catch((err) => {
-//   console.log(err);
-// });
-
-/* GET users listing. */
+/* GET questions listing. */
 router.get('/', function(req, res, next) {
-  Post.find({}, function(err, posts) {
+  User.find({}, function(err, posts) {
     if (err) {
       console.log(err);
       res.send("Some error occurred");
@@ -51,34 +32,41 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-  Post.find()
+  User.find()
 });
 
 router.post("/", function(req, res, next){
-  const user = {
-    "id": req.body.id,
-    "name": req.body.name
-  }
   console.log(user);
   var db = process.env.MONGO_URI;
   db.collection("users").insertOne(user);
   res.json({"message":"User inserted"});
-  let post = new Post({
-    title: req.body.title,
-    author: req.body.author,
-    slug: req.body.slug,
-    body: req.body.body,
-    comments: [
-      {
-        body: req.comments.body,
-        date: Date.now()
-      }
-    ]
+  let user = new User({
+    id: v4(),
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+    phone: req.body.phone,
+    university: req.body.university
   });
 
-  post.save().then(() => {
+  user.save().then(() => {
     console.log('Post saved');
   });
+});
+
+let usr = new User({
+    id: v4(),
+    name: "John",
+    email: "user1@gmail.com",
+    password: "",
+    phone: "",
+    university: ""
+    });
+
+usr.save().then(() => {
+  console.log('User saved');
+}).catch((err) => {
+  console.log(err);
 });
 
 module.exports = router;
