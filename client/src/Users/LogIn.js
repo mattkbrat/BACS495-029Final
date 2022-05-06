@@ -5,6 +5,7 @@ Login form
 import React, {useContext, useState} from 'react';
 import {Context} from "../UserContext";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 function LogIn() {
     const [email, setEmail] = useState('');
@@ -64,6 +65,7 @@ function LogIn() {
                             <button className="button block primary" disabled={loading}>
                                 {loading ? 'Submitting...' : 'Submit'}
                             </button>
+                            <li><Link to="/register"><button className="button block">Sign up</button></Link></li>
                         </div>
                     </div>
                 </form>

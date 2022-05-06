@@ -42,6 +42,7 @@ const Register = (props) => {
 
     return (
         <div className="form" aria-live="polite">
+            <h2>Register</h2>
             {loading ? (
                 'Submitting user...'
             ) : (

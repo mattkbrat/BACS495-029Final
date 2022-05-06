@@ -13,6 +13,7 @@ import Questions from './Questions/Questions.js'
 
 import Users from './Users/Users.js'
 import LogIn from './Users/LogIn.js'
+import Register from "./Users/Register";
 
 import {
     BrowserRouter as Router,
@@ -34,6 +35,7 @@ function App() {
                 <Routes>
                     {/*<Route exact path="/" element={<Home/>}/>*/}
                     <Route exact path="/" element={<Questions/>}/>
+                    <Route path="/register" element={<Register/>}/>
                     <Route exact path="/login" element={<LogIn/>}/>
                     <Route exact path="/questions" element={<Questions/>}/>
                     <Route exact path="/submit" element={<SubmitQuestion/>}/>
