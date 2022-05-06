@@ -15,15 +15,18 @@ See Project1.md for required specifications, technical features, and additional 
 3. Run the following commands under both under ```client``` and ```api``` directories:
 - ```npm install```
 - ```npm start``` 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
-6. The REST API is running on port 5000.
-7. You should see the project in action.
-8. Please be lenient with the following:
-   - The project is not optimized for production.
-   - The project is not optimized for mobile.
-   - The project is not optimized for accessibility.
-   - The project is not optimized for SEO.
-   - The project is not optimized for performance.
-   - The project is not optimized for testing.
-   - The project is not optimized for deployment.
-   - The project is not optimized for offline usage.
+5. You will need to create a ```.env``` file in the root directory of the ```/api``` directory.
+- This should contain the following variables:
+  - [MONGODB_URI](https://www.mongodb.com/docs/manual/reference/connection-string/)
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
+7. The REST API is running on port 5000.
+8. You should see the project in action.
+9. Please be lenient with the following:
+- The project is not optimized for production.
+- The project is not optimized for mobile.
+- The project is not optimized for accessibility.
+- The project is not optimized for SEO.
+- The project is not optimized for performance.
+- The project is not optimized for testing.
+- The project is not optimized for deployment.
+- The project is not optimized for offline usage.
