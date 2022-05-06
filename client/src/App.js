@@ -1,12 +1,13 @@
 import './index.css';
 
-import { useState } from 'react';
-import { ContextProvider } from './UserContext'
+import {useContext, useState} from 'react';
+import {Context, ContextProvider} from './UserContext'
 
 import MyHeader from './header.js'
 import MyFooter from './footer.js'
+import QuestionDisplay from './Questions/QuestionDisplay.js'
+import SubmitQuestion from './Questions/QuestionDisplay.js'
 import Questions from './Questions/Questions.js'
-import SubmitQuestion from './Questions/Questions.js'
 // import Account from './account.js'
 // import Home from './home.js'
 
@@ -24,6 +25,7 @@ const aboutMe = { name : "Matt", linkedIn : "https://linkedin.com/in/mattkbrat"}
 
 function App() {
     const [session, setSession] = useState(null);
+    const { user } = useContext(Context);
 
     return (
         <ContextProvider value={{ session, setSession }}>
@@ -31,6 +33,7 @@ function App() {
                 <MyHeader />
                 <Routes>
                     {/*<Route exact path="/" element={<Home/>}/>*/}
+                    <Route exact path="/" element={<Questions/>}/>
                     <Route exact path="/login" element={<LogIn/>}/>
                     <Route exact path="/questions" element={<Questions/>}/>
                     <Route exact path="/submit" element={<SubmitQuestion/>}/>

@@ -36,7 +36,6 @@ body {
 
 .App-footer {
   background-color: #161416;
-  position: fixed;
   bottom: 0;
   width: 100%;
   min-height: 1vh;

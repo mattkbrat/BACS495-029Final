@@ -1,39 +1,47 @@
 import './App.css';
-import {useContext} from "react";
+import './header.css';
+import React, {useContext} from "react";
+import { Link } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 import {Context} from './UserContext'
 
 
 export default function MyHeader(){
+    let navigate = useNavigate();
 
-    const { user } = useContext(Context);
+    const { user, setUser } = useContext(Context);
+
+    const logOut = () => {
+        setUser(null);
+        navigate("/")
+    }
 
     return (
             <div>
             <header className="App-header">
-                <a className="heart" target="_self"
-                    href='/'
+                <Link to='/' className="heart"
                     rel="noopener noreferrer"
                 >🎓
-                </a>
+                </Link>
                 <input type="text" placeholder="🔍 Search..." name="search"/>
                 <div>
-                    {user ?
-                        <a className="heart" target="_self"
-                           href='/logout'
-                           rel="noopener noreferrer">
-                            <button>
-                                Logout
-                            </button>
-                        </a> :
-                        <a className="heart" target="_self"
-                            href='/login'
-                            rel="noopener noreferrer">
-                            <button>
-                                Login
-                            </button>
-                        </a>
-                    }
+                    {user? (
+                        <nav className="navigation-menu">
+                            <ul>
+                                <li><button onClick={logOut}>Logout</button></li>
+                                <li><Link to="/questions"><button>Questions</button></Link></li>
+                            </ul>
+                        </nav>
+                    ) : (
+                        <nav className="navigation-menu">
+                            <ul>
+                                <li><Link to="/login"><button>Login</button></Link></li>
+                            </ul>
+                        </nav>
+                    )}
+                    <br/>
+                    <p></p>
                 </div>
             </header>
             </div>

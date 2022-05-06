@@ -21,7 +21,7 @@ function LogIn() {
 
         // /users/:userId/books/:bookId
         axios.get(uri+'/'+email+'/'+password)
-            .then(res => setUser(res.data)) // set user in context
+            .then(res => setUser(res.data[2])) // set user in context
             .then(() => setError(''))  //clear error message
             .then(() => setLoggedIn(true)) // set logged in to true
             .catch(() => console.log(error)) //set error message
@@ -30,6 +30,7 @@ function LogIn() {
 
     return (
         <div className="form" aria-live="polite">
+            <h2>Log In</h2>
             {loading ? (
                 'Submitting user...'
             ) : (

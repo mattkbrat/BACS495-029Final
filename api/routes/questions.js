@@ -2,26 +2,25 @@ let express = require('express');
 const mongoose = require("mongoose");
 
 const { route } = require('.');
+const { v4 } = require('uuid');
 const app = express();
 let router = express.Router();
 
-const postSchema = new mongoose.Schema({
+const questionSchema = new mongoose.Schema({
+    id: String,
     title: String,
     author: String,
-    slug: {type: String, unique: true},
     body: String,
-    comments: [{
-        body: String,
-        date: Date
-    }],
+    votes: Number,
+    answers: [String],
     date: {type: Date, default: Date.now},
 })
 
-const Post = mongoose.model('Post', postSchema);
+const Question = mongoose.model('Question', questionSchema);
 
 /* GET questions listing. */
 router.get('/', function(req, res, next) {
-    Post.find({}, function(err, posts) {
+    Question.find({}, function(err, posts) {
         if (err) {
             console.log(err);
             res.send("Some error occurred");
@@ -33,33 +32,72 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-    Post.find()
+    Question.find({id: req.params.id}, function(err, posts) {
+        if (err) {
+            console.log(err);
+            res.send("Some error occurred");
+        } else {
+            console.log(posts);
+            res.json(Object.values(posts));
+        }
+    });
 });
 
 router.post("/", function(req, res, next){
-    const user = {
-        "id": req.body.id,
-        "name": req.body.name
-    }
-    console.log(user);
-    var db = process.env.MONGO_URI;
-    db.collection("users").insertOne(user);
-    res.json({"message":"User inserted"});
-    let post = new Post({
-        title: req.body.title,
-        author: req.body.author,
-        slug: req.body.slug,
-        body: req.body.body,
-        comments: [
-            {
-                body: req.comments.body,
-                date: Date.now()
-            }
-        ]
-    });
+    try{
+        let question = new Question({
+            id: v4(),
+            title: req.body.title,
+            author: req.body.author,
+            body: req.body.body,
+            answers: [],
+            votes: 0,
+        });
 
-    post.save().then(() => {
-        console.log('Post saved');
+        question.save().then(() => {
+            console.log('Post saved');
+            res.json(question);
+        });
+    } catch(e){
+        console.log(e);
+        res.status(500).send("Some error occurred");
+    }
+});
+
+router.patch("/votes/id/:id", function(req, res, next){
+    console.log("ID: " + req.params.id);
+    // Get question by id
+    Question.findOne({id: req.params.id}, function(err, question){
+        if(err){
+            console.log(err);
+            res.status(500).send("Some error occurred");
+        } else {
+            console.log(question);
+            question.votes = question.votes + 1;
+
+            question.save().then(() => {
+                console.log('Post updated');
+                res.json(question);
+            });
+        }
+    });
+});
+
+router.patch('/answers/id/:id', function(req, res, next){
+    console.log("ID: " + req.params.id);
+    // Get question by id
+    Question.findOne({id: req.params.id}, function(err, question){
+        if(err){
+            console.log(err);
+            res.status(500).send("Some error occurred");
+        } else {
+            console.log(question);
+            question.answers.push(req.body.answer);
+            question.save().then(() => {
+                res.json(question);
+            }
+            );
+        }
     });
 });
 

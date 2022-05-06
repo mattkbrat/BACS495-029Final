@@ -19,7 +19,7 @@ export default function MyFooter() {
                     <div>
                         {user ? (
                             <p>
-                                User: {user[2].name}
+                                User: {user.name}
                             </p>
                         ) : (
                             <p>

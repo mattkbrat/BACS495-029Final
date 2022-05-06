@@ -4,10 +4,11 @@
 
 - [x] Account creation (Create a user in mongodb)
 - [x] Basic Login (Just verify the user is in the database)
-- [ ] Question submission (User can submit a question)
-- [ ] Question answering  (User can submit an answer to a question)
-- [ ] Question voting (User can vote on a question)
-- [ ] Good CSS layout
+- [x] Question submission (User can submit a question)
+- [x] Question answering  (User can submit an answer to a question)
+- [x] Question voting (User can vote on a question)
+- [x] Good CSS layout
+  - "Good" is subjective, but it should be good enough to be usable
 
 ## Optional Features
 
@@ -21,7 +22,7 @@
 
 ## Technical Features
 
-- [ ] Custom-built REST API for questions and answers in NodeJS
+- [x] Custom-built REST API for questions and answers in NodeJS
 - [x] NoSQL Database (MongoDB)
 - [x] React front-end
 
