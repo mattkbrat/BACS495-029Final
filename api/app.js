@@ -16,6 +16,7 @@ mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const indexRouter = require('./routes');
 const usersRouter = require('./routes/users');
+const questionsRouter = require('./routes/questions');
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/questions', questionsRouter);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 

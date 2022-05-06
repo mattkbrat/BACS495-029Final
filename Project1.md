@@ -2,8 +2,8 @@
 
 ## Required Features
 
-- [ ] Account creation (Create a user in mongodb)
-- [ ] Basic Login (Just verify the user is in the database)
+- [x] Account creation (Create a user in mongodb)
+- [x] Basic Login (Just verify the user is in the database)
 - [ ] Question submission (User can submit a question)
 - [ ] Question answering  (User can submit an answer to a question)
 - [ ] Question voting (User can vote on a question)
@@ -11,7 +11,7 @@
 
 ## Optional Features
 
-- [ ] Authentication using passwords
+- [x] Authentication using passwords
 - [ ] Encryption of passwords
 - [ ] Question categories
 - [ ] Responsive design
@@ -22,5 +22,11 @@
 ## Technical Features
 
 - [ ] Custom-built REST API for questions and answers in NodeJS
-- [ ] NoSQL Database (MongoDB)
-- [ ] React front-end
+- [x] NoSQL Database (MongoDB)
+- [x] React front-end
+
+## Additional Features
+- [x] Mongoose ORM for MongoDB
+- [x] Axios for REST API calls
+- [x] React Router for navigation
+- [x] React context for tracking user login status
